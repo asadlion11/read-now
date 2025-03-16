@@ -8,7 +8,7 @@
   <section class="bg-white p-6 rounded-lg shadow-md mb-8">
     <form ng-submit="addTask(bookForm)" class="space-y-4" novalidate name="bookForm">
       <h2 class="text-xl sm:text-2xl font-bold text-indigo-900">Add Book</h2>
-      <p class="text-sm sm:text-base text-indigo-900">Add the book name you want to read now!</p>
+      <p class="text-sm sm:text-base text-indigo-900">Fulfill the book you want to read now with timer!</p>
 
       <!-- Task Inputs -->
       <div class="space-y-2">
@@ -29,7 +29,7 @@
                    ng-required="true"
                    name="hours"
                    ng-model="task.hours" 
-                   placeholder="Hours"
+                   placeholder="Hours of Read"
                    min="0"
                    class="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
                    ng-class="{'border-red-500': bookForm.hours.$touched && bookForm.hours.$invalid}">
@@ -43,7 +43,7 @@
                    ng-required="true"
                    name="minutes"
                    ng-model="task.minutes" 
-                   placeholder="Minutes"
+                   placeholder="Minutes of Read"
                    min="0"
                    class="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
                    ng-class="{'border-red-500': bookForm.minutes.$touched && bookForm.minutes.$invalid}">
