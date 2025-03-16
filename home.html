@@ -1,0 +1,89 @@
+<div class="max-w-3xl mx-auto">
+  <!-- Header -->
+  <header class="mb-6">
+    <h1 class="text-2xl sm:text-3xl font-bold text-indigo-800">Read Now</h1>
+  </header>
+
+  <!-- Add Task Form -->
+  <section class="bg-white p-6 rounded-lg shadow-md mb-8">
+    <form ng-submit="addTask(bookForm)" class="space-y-4" novalidate name="bookForm">
+      <h2 class="text-xl sm:text-2xl font-bold text-indigo-900">Add Book</h2>
+      <p class="text-sm sm:text-base text-indigo-900">Add the book name you want to read now!</p>
+
+      <!-- Task Inputs -->
+      <div class="space-y-2">
+        <input type="text" 
+               ng-required="true"
+               name="name"
+               ng-model="task.name" 
+               placeholder="Book Name"
+               class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+               ng-class="{'border-red-500': bookForm.name.$touched && bookForm.name.$invalid}">
+        <div ng-show="bookForm.name.$touched && bookForm.name.$invalid">
+          <small class="text-red-500">Enter a valid Book Name</small>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="flex flex-col">
+            <input type="number" 
+                   ng-required="true"
+                   name="hours"
+                   ng-model="task.hours" 
+                   placeholder="Hours"
+                   min="0"
+                   class="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                   ng-class="{'border-red-500': bookForm.hours.$touched && bookForm.hours.$invalid}">
+            <div ng-show="bookForm.hours.$touched && bookForm.hours.$invalid">
+              <small class="text-red-500">Enter valid Hours</small>
+            </div>
+          </div>
+          
+          <div class="flex flex-col">
+            <input type="number" 
+                   ng-required="true"
+                   name="minutes"
+                   ng-model="task.minutes" 
+                   placeholder="Minutes"
+                   min="0"
+                   class="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                   ng-class="{'border-red-500': bookForm.minutes.$touched && bookForm.minutes.$invalid}">
+            <div ng-show="bookForm.minutes.$touched && bookForm.minutes.$invalid">
+              <small class="text-red-500">Enter valid Minutes</small>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" 
+                class="w-full bg-indigo-600 text-white p-2 rounded-md hover:bg-indigo-700 transition duration-200"
+                ng-class="{'cursor-not-allowed opacity-75': bookForm.$invalid}">
+          Start Reading
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Tasks List -->
+  <section>
+    <h2 class="text-xl sm:text-2xl font-bold text-indigo-900 mb-4">Reading Books</h2>
+    <div class="grid gap-4 grid-cols-1 md:grid-cols-2">
+      <!-- Task Card -->
+      <div ng-repeat="task in tasks" class="bg-white p-4 rounded-lg shadow-md">
+        <h3 class="text-lg font-bold text-indigo-800">{{task.name}}</h3>
+        <div class="mt-2 text-red-500">
+          <p class="text-xl font-mono">
+            {{task.hours | numberPad:2}} : 
+            {{task.minutes | numberPad:2}} : 
+            {{task.seconds | numberPad:2}}
+          </p>
+        </div>
+        <div class="flex items-center space-x-2 mt-2">
+          <span class="text-indigo-600 font-semibold">Status:</span>
+          <input type="button"
+                 ng-value="task.completed ? 'Completed' : 'InProgress'"
+                 class="font-bold px-2 py-1 hover:bg-indigo-700 transition"
+                 ng-class="{'text-green-600': task.completed, 'text-indigo-600': !task.completed}" /> 
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
